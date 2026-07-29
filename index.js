@@ -65,6 +65,7 @@ app.patch("/api/student/:id", (req, res) => {
 //post data or create data
 app.post("/api/student", (req, res) => {
   const body = req.body;
+  // this is for we require these paramete. if we require
   // if(!body || !body.first_name || !body.last_name || !body.age  ){
   //   return res.status(400).json({mes:`These field are required`})
   // } 
