@@ -85,7 +85,24 @@ app.delete("/api/student/:id", (req, res) => {
 app.listen(PORT, (err) => {
   console.log(`Server Started`);
 });
+          app.put("/api/student/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const index = users.findIndex((user) => user.id === id);
 
+    if (index === -1) {
+        return res.status(404).json({ status: "Student not found" });
+    }
+
+    users[index] = {
+        id: id,
+        ...req.body,
+    };
+
+    return res.json({
+        status: "success",
+        student: users[index],
+    });
+});
 /*
 app.get("/api/student",(req, res)=>{
     return res.json(users)
@@ -124,22 +141,5 @@ app.get("/api/student",(req, res)=>{
                 })
 
 
-                app.put("/api/student/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const index = users.findIndex((user) => user.id === id);
-
-    if (index === -1) {
-        return res.status(404).json({ status: "Student not found" });
-    }
-
-    users[index] = {
-        id: id,
-        ...req.body,
-    };
-
-    return res.json({
-        status: "success",
-        student: users[index],
-    });
-});
+      
 */
