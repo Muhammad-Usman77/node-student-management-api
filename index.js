@@ -6,20 +6,22 @@ const PORT = 8001;
 
 app.use(express.urlencoded({ extended: false }));
 
-
-// request logging middlewhere = eska matlab hai kh kis client ny konsi request ki hai 
-// aur oski detail hai es main yh middle where hai 
-app.use((req, res, next)=>{
-    console.log('this is middle where 1');
-    fs.appendFile("./log.txt", `\n${new Date().toLocaleString()}: ${req.ip} ${req.method} ${req.path}`, (err) => {
-    if (err) {
+// request logging middlewhere = eska matlab hai kh kis client ny konsi request ki hai
+// aur oski detail hai es main yh middle where hai
+app.use((req, res, next) => {
+  console.log("this is middle where 1");
+  fs.appendFile(
+    "./log.txt",
+    `\n${new Date().toLocaleString()}: ${req.ip} ${req.method} ${req.path}`,
+    (err) => {
+      if (err) {
         return res.status(500).json({ message: "Failed to write log file" });
-    }
+      }
 
-    next();
+      next();
+    },
+  );
 });
-  
-})
 let users = [];
 
 //get all users
@@ -27,18 +29,16 @@ app.get("/api/student", (req, res) => {
   return res.json(users);
 });
 
-
 // get user by name
 app.get("/api/student/search", (req, res) => {
   const name = req.query.first_name;
 
   const result = users.filter(
-    (user) => user.first_name.toLowerCase() === name.toLowerCase()
+    (user) => user.first_name.toLowerCase() === name.toLowerCase(),
   );
 
   return res.json(result);
 });
-
 
 // get users by id:
 app.get("/api/student/:id", (req, res) => {
@@ -46,8 +46,6 @@ app.get("/api/student/:id", (req, res) => {
   update = users.find((user) => user.id === id);
   return res.json(users);
 });
-
-
 
 //update users by id
 app.patch("/api/student/:id", (req, res) => {
@@ -68,7 +66,7 @@ app.post("/api/student", (req, res) => {
   // this is for we require these paramete. if we require
   // if(!body || !body.first_name || !body.last_name || !body.age  ){
   //   return res.status(400).json({mes:`These field are required`})
-  // } 
+  // }
   users.push({ ...body, id: users.length + 1 });
   return res.json({ status: "success", id: users.length });
 });
@@ -82,26 +80,29 @@ app.delete("/api/student/:id", (req, res) => {
   return res.json({ status: "success", users });
 });
 
+// this port for listen
 app.listen(PORT, (err) => {
   console.log(`Server Started`);
 });
-          app.put("/api/student/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const index = users.findIndex((user) => user.id === id);
 
-    if (index === -1) {
-        return res.status(404).json({ status: "Student not found" });
-    }
+// this is put function where we use to change complete data on induction
+app.put("/api/student/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const index = users.findIndex((user) => user.id === id);
 
-    users[index] = {
-        id: id,
-        ...req.body,
-    };
+  if (index === -1) {
+    return res.status(404).json({ status: "Student not found" });
+  }
 
-    return res.json({
-        status: "success",
-        student: users[index],
-    });
+  users[index] = {
+    id: id,
+    ...req.body,
+  };
+
+  return res.json({
+    status: "success",
+    student: users[index],
+  });
 });
 /*
 app.get("/api/student",(req, res)=>{
