@@ -1,3 +1,30 @@
+
+const express = require("express");
+
+const {connectionMongoDb} = require("./connectionmongo")
+const {logReqRes}        = require("./middleware/studentMiddleware")
+
+const app = express();
+const PORT = 8001;
+
+app.use(express.urlencoded({ extended: false }));
+
+connectionMongoDb("mongodb://127.0.0.1:27017/student-management-system-1")
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
+const studentRoutes = require("./routes/studentRoutes")
+
+
+// request logging middlewhere = eska matlab hai kh kis client ny konsi request ki hai
+// aur oski detail hai es main yh middle where hai
+app.use(logReqRes("log.txt"));
+
+app.use('/api/student',studentRoutes)
+// this port for listen
+app.listen(PORT, (err) => {
+  console.log(`Server Started`);
+});
+/*
 const { urlencoded } = require("body-parser");
 const fs = require("fs");
 const express = require("express");
@@ -104,6 +131,7 @@ app.put("/api/student/:id", (req, res) => {
     student: users[index],
   });
 });
+*/
 /*
 app.get("/api/student",(req, res)=>{
     return res.json(users)
@@ -141,6 +169,10 @@ app.get("/api/student",(req, res)=>{
                  return res.json(users[index])
                 })
 
-
+firstName
+lastName
+age
+rollNumber
+studentClass
       
 */
