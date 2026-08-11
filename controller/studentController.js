@@ -19,9 +19,6 @@ async function handlegetStudnetBySearch(req, res){
        firstName: req.query.firstName,
        
     })
-
-
-
   return res.json(result);
 }
 
