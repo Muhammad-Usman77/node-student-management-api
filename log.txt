@@ -66,3 +66,8 @@
 8/7/2026, 10:35:00 AM: ::1 GET /api/student
 8/7/2026, 10:35:14 AM: ::1 GET /api/student/search
 8/7/2026, 10:35:34 AM: ::1 GET /api/student/search
+8/7/2026, 4:50:59 PM: ::1 GET /api/student
+8/7/2026, 4:52:40 PM: ::1 PUT /api/student/6a7564926070d5b821f54372
+8/7/2026, 4:53:40 PM: ::1 GET /api/student
+8/7/2026, 4:59:02 PM: ::1 PUT /api/student/6a7564cbe0e3e3de4e0a37c1
+8/7/2026, 4:59:21 PM: ::1 GET /api/student
