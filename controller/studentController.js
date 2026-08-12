@@ -29,7 +29,16 @@ async function handleUpdateUserByPatch(req, res){
 }
 
 async function hanldeCreteStudent(req, res){
+    console.log("BODY:", req.body);
+
   const body = req.body;
+//   console.log("BODY:", body);
+// console.log("firstName:", body.firstName);
+// console.log("lastName:", body.lastName);
+// console.log("age:", body.age);
+// console.log("studentClass:", body.studentClass);
+// console.log("rollNumber:", body.rollNumber);
+ // console.log("body",body)
   // this is for we require these paramete. if we require
   if(!body || !body.firstName || !body.lastName || !body.age || !body.studentClass || !body.rollNumber){
     return res.status(400).json({mes:`These field are required`})
