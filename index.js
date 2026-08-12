@@ -1,25 +1,23 @@
-
 const express = require("express");
 
-const {connectionMongoDb} = require("./connectionmongo")
-const {logReqRes}        = require("./middleware/studentMiddleware")
+const { connectionMongoDb } = require("./connectionmongo");
+const { logReqRes } = require("./middleware/studentMiddleware");
 
 const app = express();
 const PORT = 8001;
 
 app.use(express.urlencoded({ extended: false }));
-
+app.use(express.json());
 connectionMongoDb("mongodb://127.0.0.1:27017/student-management-system-1")
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
-const studentRoutes = require("./routes/studentRoutes")
-
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
+const studentRoutes = require("./routes/studentRoutes");
 
 // request logging middlewhere = eska matlab hai kh kis client ny konsi request ki hai
 // aur oski detail hai es main yh middle where hai
 app.use(logReqRes("log.txt"));
 
-app.use('/api/student',studentRoutes)
+app.use("/api/student", studentRoutes);
 // this port for listen
 app.listen(PORT, (err) => {
   console.log(`Server Started`);
