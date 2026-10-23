@@ -5,7 +5,7 @@ const { logReqRes } = require("./middleware/studentMiddleware");
 
 const app = express();
 const PORT = 8001;
-
+// index 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 connectionMongoDb("mongodb://127.0.0.1:27017/student-management-system-1")
