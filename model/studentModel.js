@@ -28,3 +28,6 @@ const studentScema = new mongoose.Schema(
 const  Student = mongoose.model("student", studentScema)
 
 module.exports = Student
+
+
+// studnet model
