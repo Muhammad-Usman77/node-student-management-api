@@ -78,3 +78,5 @@ module.exports = {
     deleteStudentById,
     handleUpdateStudent,
 }
+
+//student controller

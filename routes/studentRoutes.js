@@ -22,3 +22,5 @@ router
   .get(handlegetStudentById);
 
 module.exports = router;
+
+// studnet routes
